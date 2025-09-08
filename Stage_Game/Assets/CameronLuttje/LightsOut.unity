@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb84559230ef3f4dafdd081f26310fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 7
+  width: 2
+  height: 5
   spacing: 1.05
   tilePrefab: {fileID: 783166433989120005, guid: 99a2223278a45734d9e21383d2865fea, type: 3}
   boardParent: {fileID: 0}
