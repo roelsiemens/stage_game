@@ -3,39 +3,39 @@ using UnityEngine.UI;
 
 public class UIOverlapHighlight : MonoBehaviour
 {
-    public RawImage otherImage;
+    public RawImage cl;
     public Color highlightColor = new Color(0.5f, 0.7f, 1f, 1f);
 
-    private RawImage thisImage;
+    private RawImage puzzleImage;
     private Color originalColor;
     private Color otherOriginalColor;
 
     void Start()
     {
-        otherImage = GetComponentInChildren<RawImage>();
-        thisImage = GetComponentInChildren<RawImage>();
-        originalColor = thisImage.color;
-        otherOriginalColor = otherImage.color;
+        //cl = GetComponent<RawImage>();
+        //puzzleImage = gameObject.GetComponentInChildren<RawImage>();
+        originalColor = puzzleImage.color;
+        otherOriginalColor = cl.color;
     }
 
     void Update()
     {
         if (IsOverlapping())
         {
-            thisImage.color = highlightColor;
-            otherImage.color = highlightColor;
+            puzzleImage.color = highlightColor;
+            cl.color = highlightColor;
         }
         else
         {
-            thisImage.color = originalColor;
-            otherImage.color = otherOriginalColor;
+            puzzleImage.color = originalColor;
+            cl.color = otherOriginalColor;
         }
     }
 
     bool IsOverlapping()
     {
         RectTransform rt1 = GetComponentInChildren<RectTransform>();
-        RectTransform rt2 = otherImage.GetComponentInChildren<RectTransform>();
+        RectTransform rt2 = cl.GetComponent<RectTransform>();
         return RectOverlaps(rt1, rt2);
     }
 
@@ -44,4 +44,5 @@ public class UIOverlapHighlight : MonoBehaviour
         return RectTransformUtility.RectangleContainsScreenPoint(rt1, rt2.position) ||
                RectTransformUtility.RectangleContainsScreenPoint(rt2, rt1.position);
     }
+
 }
