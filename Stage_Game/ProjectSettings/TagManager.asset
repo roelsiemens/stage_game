@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - BeginOfPuzzle
+  - FriendlyNPC
+  - ConnectingTrigger
+  - LightOutTrigger
+  - DroppedItem
   layers:
   - Default
   - TransparentFX
