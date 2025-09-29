@@ -8,6 +8,7 @@ TagManager:
   - ConnectingTrigger
   - LightOutTrigger
   - DroppedItem
+  - RotatePiece
   layers:
   - Default
   - TransparentFX
