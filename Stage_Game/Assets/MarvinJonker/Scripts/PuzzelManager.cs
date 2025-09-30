@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PuzzelManager : MonoBehaviour
 {
     [Header("Kleur instellingen")]
-    public Color progressColor = new Color(0.5f, 0.8f, 1f, 1f); // lichtblauw
+    public Color progressColor = Color.cyan;
 
     [System.Serializable]
     public class BeginOfPuzzle
@@ -17,7 +17,7 @@ public class PuzzelManager : MonoBehaviour
     public class PuzzleButton
     {
         public GameObject puzzleObject;
-        public PuzzlePiece puzzlePiece;
+        public bool connected = false;
     }
     public PuzzleButton[] puzzleButtons;
 
@@ -25,42 +25,18 @@ public class PuzzelManager : MonoBehaviour
     public class ConnectingLine
     {
         public GameObject cl;
-        public bool connected = false;
     }
     public ConnectingLine[] connectingLines;
 
-
-    void Start()
-    {
-        // Geef alle BeginOfPuzzle een lichtblauwe kleur
-        foreach (var bop in BeginOfPuzzles)
-        {
-            var matColor = bop.beginPiece.GetComponentInChildren<RawImage>();
-            if (matColor != null)
-                matColor.color = progressColor;
-        }
-
-        // Koppel rotatie-functies aan de puzzelbuttons
-        foreach (var pb in puzzleButtons)
-        {
-            PuzzlePiece piece = pb.puzzlePiece; // closure fix
-            //pb.button.onClick.AddListener(() => piece.RotatePiece());
-        }
-    }
-
     /// <summary>
-    /// Geeft zowel de lijn als het doelwit dezelfde kleur
+    /// Geeft de kleur van het object aan het doelwit
     /// </summary>
-    public void Colorize(GameObject cline, GameObject target)
+    public void colorChange(GameObject bop, GameObject target)
     {
-        // lijn kleuren
-        var lineSprite = cline.GetComponent<SpriteRenderer>();
-        if (lineSprite != null)
-            lineSprite.color = progressColor;
+        var targetSprite = target.GetComponentInChildren<SpriteRenderer>();
 
-        // target kleuren
-        var targetSprite = target.GetComponent<SpriteRenderer>();
-        if (targetSprite != null)
+        var bopSprite = bop.GetComponent<SpriteRenderer>();
+        if (bopSprite != null)
             targetSprite.color = progressColor;
     }
 }

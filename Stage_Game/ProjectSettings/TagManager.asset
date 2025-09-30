@@ -9,6 +9,10 @@ TagManager:
   - LightOutTrigger
   - DroppedItem
   - RotatePiece
+  - StartCL
+  - CL
+  - Puzzlepiece
+  - Start
   layers:
   - Default
   - TransparentFX

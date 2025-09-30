@@ -1,44 +1,52 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
 {
-    public float rotationStep = 90f;      // aantal graden per klik
-    public float rotationSpeed = 180f;    // graden per seconde
 
-    private bool isRotating= false;
-    private Quaternion targetRotation;    // doelrotatie
+    public bool connected;
+
+    public PuzzelManager manager; // verwijzing naar je manager waar arrays in zitten
 
     void Start()
     {
-        // Startwaarde = huidige rotatie
-        targetRotation = transform.rotation;
+        // automatische assignment voor puzzlemanager
+        manager = GameObject.Find("Puzzle").GetComponent<PuzzelManager>();
     }
 
-    void OnMouseDown()
+    private void Update()
     {
-        if (!isRotating)
+        foreach (var pb in manager.puzzleButtons)
         {
-            // Tel 90 graden op bij de huidige doelrotatie
-            targetRotation *= Quaternion.Euler(0, 0, rotationStep);
-            isRotating = true;
+            if (pb.connected == true)
+            {
+                connected = true;
+            }
         }
     }
 
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isRotating)
+        foreach (var pb in manager.puzzleButtons)
         {
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
-            );
-
-            // check of we het doel bereikt hebben
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.01f)
+            if (collision.gameObject.GetComponentInChildren<SpriteRenderer>().color == manager.progressColor)
             {
-                transform.rotation = targetRotation; // fix afrondingsfout
-                isRotating = false; // cooldown weer vrijgeven
+                print("connected");
+                pb.connected = true;
+                manager.colorChange(pb.puzzleObject, gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        foreach (var pb in manager.puzzleButtons)
+        {
+            if (collision.gameObject.GetComponentInChildren<SpriteRenderer>().color != manager.progressColor)
+            {
+                print("not connected");
+                pb.connected = false;
+                pb.puzzleObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             }
         }
     }

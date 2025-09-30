@@ -1,48 +1,28 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIOverlapHighlight : MonoBehaviour
 {
-    public RawImage cl;
-    public Color highlightColor = new Color(0.5f, 0.7f, 1f, 1f);
 
-    private RawImage puzzleImage;
-    private Color originalColor;
-    private Color otherOriginalColor;
+    // dit script is niet in gebruik
 
-    void Start()
+    public Color progressColor = Color.cyan;
+
+    public void colorChange(GameObject bop, GameObject target)
     {
-        //cl = GetComponent<RawImage>();
-        //puzzleImage = gameObject.GetComponentInChildren<RawImage>();
-        originalColor = puzzleImage.color;
-        otherOriginalColor = cl.color;
-    }
+        var targetSprite = target.GetComponent<SpriteRenderer>();
 
-    void Update()
-    {
-        if (IsOverlapping())
+        var bopSprite = bop.GetComponent<SpriteRenderer>();
+        if (bopSprite != null )
+            targetSprite.color = progressColor;
+
+        if (CompareTag("PuzzlePiece") && target.CompareTag("PuzzlePiece"))
         {
-            puzzleImage.color = highlightColor;
-            cl.color = highlightColor;
-        }
-        else
-        {
-            puzzleImage.color = originalColor;
-            cl.color = otherOriginalColor;
+            targetSprite.color = progressColor;
         }
     }
 
-    bool IsOverlapping()
-    {
-        RectTransform rt1 = GetComponentInChildren<RectTransform>();
-        RectTransform rt2 = cl.GetComponent<RectTransform>();
-        return RectOverlaps(rt1, rt2);
-    }
 
-    bool RectOverlaps(RectTransform rt1, RectTransform rt2)
-    {
-        return RectTransformUtility.RectangleContainsScreenPoint(rt1, rt2.position) ||
-               RectTransformUtility.RectangleContainsScreenPoint(rt2, rt1.position);
-    }
-
+    
 }
