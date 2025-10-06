@@ -8,6 +8,10 @@ TagManager:
   - ConnectingTrigger
   - LightOutTrigger
   - DroppedItem
+  - Bullet
+  - Asteroid
+  - AsteroidBorder
+  - BulletBorder
   layers:
   - Default
   - TransparentFX
