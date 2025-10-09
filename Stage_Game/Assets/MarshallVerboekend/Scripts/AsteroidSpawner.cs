@@ -23,9 +23,13 @@ public class AsteroidSpawner : MonoBehaviour
         if (canSpawn && spawnTimer > 0)
         {
             canSpawn = false;
-            spawnTimer -= Time.deltaTime;
             Randomizer();
             Instantiate(SpawningAsteriod, SpawningLocation.position, SpawningLocation.rotation);
+        }
+
+        if (!canSpawn)
+        {
+            spawnTimer -= Time.deltaTime;
         }
 
         if (spawnTimer <= 0)
