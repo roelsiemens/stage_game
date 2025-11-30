@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private float speed = 10f;
+    public float speed = 5;
 
     void Update()
     {
@@ -11,12 +11,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Asteroid"))
-        {
-            Destroy(gameObject);
-        }
-
-        if (collision.CompareTag("BulletBorder"))
+        if (collision.CompareTag("Asteroid") || collision.CompareTag("BulletBorder"))
         {
             Destroy(gameObject);
         }

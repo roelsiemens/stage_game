@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class AsteroidScript : MonoBehaviour
 {
-    public int Health = 3;
+    public float speed = 2;
 
-    private float speed = 2f;
+    public int health = 1;
+
 
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
 
-        if (Health <= 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
@@ -20,12 +21,9 @@ public class AsteroidScript : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            Health -= 1;
-        }
-
-        if (collision.CompareTag("AsteroidBorder"))
-        {
-            Destroy(gameObject);
+            health -= 1;
+            Destroy(collision.gameObject);
         }
     }
 }
+
