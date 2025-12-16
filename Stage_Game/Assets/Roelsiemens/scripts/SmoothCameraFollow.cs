@@ -15,13 +15,16 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private Vector3 _currentVelocity = Vector3.zero;
 
-    #endregion
+    // Rotation settings
+    [SerializeField] private float rotateSpeed = 5f;
+    private Quaternion targetRotation;
 
-    #region Unity callbacks
+    #endregion
 
     private void Awake()
     {
         _offset = transform.position - target.position;
+        targetRotation = transform.rotation;
     }
 
     private void LateUpdate()
@@ -50,7 +53,26 @@ public class SmoothCameraFollow : MonoBehaviour
             ref _currentVelocity,
             smoothTime
         );
+
+        // ----- SMOOTH ROTATION -----
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation,
+            targetRotation,
+            rotateSpeed * Time.deltaTime
+        );
     }
 
-    #endregion
+    // ===== PUBLIC FUNCTION: Rotate camera 90 degrees AND update offset =====
+    public void RotateCamera90()
+    {
+        // 1. Rotatie instellen
+        targetRotation = Quaternion.Euler(
+            transform.eulerAngles.x,
+            transform.eulerAngles.y + 90f,
+            transform.eulerAngles.z
+        );
+
+        // 2. Offset laten meedraaien -> camera verplaatst correct mee
+        _offset = Quaternion.Euler(0f, 90f, 0f) * _offset;
+    }
 }
