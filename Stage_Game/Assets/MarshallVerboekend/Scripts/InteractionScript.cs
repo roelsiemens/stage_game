@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionScript : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class InteractionScript : MonoBehaviour
     public GameObject ConnectingText;
     public GameObject LightsOutText;
     public GameObject DroppedText;
+
+    public Button Exitbutton;
 
     public bool AtNPC = false;
     public bool AtConnecting = false;
