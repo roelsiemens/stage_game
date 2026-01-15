@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Roelsiemens/Office_Stage_1.unity
+    guid: 50c79e272221198458a720f593289455
+  - enabled: 1
+    path: Assets/CameronLuttje/Scenes/LightsOut.unity
+    guid: d2f754f06635bce47887c87c9f1c50ca
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

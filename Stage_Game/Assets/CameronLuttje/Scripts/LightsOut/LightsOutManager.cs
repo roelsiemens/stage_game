@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LightsOutManager : MonoBehaviour
 {
@@ -179,6 +181,12 @@ public class LightsOutManager : MonoBehaviour
         }
 
         Debug.Log("You solved it!");
+        Invoke(nameof(switchscene), 1f);
+    }
+
+    public void switchscene()
+    {
+        SceneManager.LoadScene("roelsiemens");
     }
 
     private void StartTimer()
