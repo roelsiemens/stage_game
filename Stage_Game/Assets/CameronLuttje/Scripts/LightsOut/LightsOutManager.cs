@@ -186,7 +186,7 @@ public class LightsOutManager : MonoBehaviour
 
     public void switchscene()
     {
-        SceneManager.LoadScene("roelsiemens");
+        SceneManager.LoadScene("Office_Stage_1");
     }
 
     private void StartTimer()
