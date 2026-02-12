@@ -1,25 +1,20 @@
 using UnityEngine;
+using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class ClickSpin : MonoBehaviour
 {
-    // The amount to rotate (90 degrees to the right)
-    public float rotationAmount = 90f;
+    float[] rotations = { 0f, 90f, 180f, 270f };
 
-    void Update()
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0)) // Left mouse button click
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        int rand = Random.Range(0, rotations.Length);
+        transform.eulerAngles = new Vector3(0f, 0f, rotations[rand]);
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.CompareTag("MazeBlock"))
-                {
-                    // Rotate the clicked object 90 degrees to the right (around Y axis)
-                    hit.collider.transform.Rotate(0f, 0f, rotationAmount);
-                }
-            }
-        }
+    }
+
+    private void OnMouseDown()
+    { 
+        transform.Rotate(new Vector3(0f,0f, 90f)); 
     }
 }
